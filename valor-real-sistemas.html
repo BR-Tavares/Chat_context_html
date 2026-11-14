@@ -1,0 +1,385 @@
+<title>Valor Real em Sistemas</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: coluna de leitura única tipo caderno técnico; diagramas em blocos de prancheta */
+:root{
+  --bg:#F3F5F2; --surface:#FFFFFF; --fg:#1B2321; --muted:#566360; --line:#CBD4CF;
+  --accent:#2E6B58; --energy:#B86B1F; --loss:#A1413A; --info:#3B5F8F;
+  --accent-soft:#E1EEE8; --energy-soft:#F6E9DA; --loss-soft:#F4E2DF; --info-soft:#E2E9F3;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121816; --surface:#1A2220; --fg:#E4EAE7; --muted:#9AA8A3; --line:#2F3B37;
+  --accent:#6FC0A2; --energy:#E3A35C; --loss:#E0857C; --info:#8DB2E3;
+  --accent-soft:#1E3A31; --energy-soft:#3A2C1C; --loss-soft:#3B2321; --info-soft:#1F2C3E;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121816; --surface:#1A2220; --fg:#E4EAE7; --muted:#9AA8A3; --line:#2F3B37;
+  --accent:#6FC0A2; --energy:#E3A35C; --loss:#E0857C; --info:#8DB2E3;
+  --accent-soft:#1E3A31; --energy-soft:#3A2C1C; --loss-soft:#3B2321; --info-soft:#1F2C3E;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 64px}
+main{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(2rem,5vw,2.9rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:700}
+h3{font-size:1.1rem;font-weight:700}
+p{margin:0;max-width:68ch}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+section{display:flex;flex-direction:column;gap:16px}
+.lead{font-size:1.12rem;color:var(--fg)}
+.muted{color:var(--muted)}
+.ref{font-family:var(--mono);font-size:.82rem;color:var(--muted)}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px}
+.diagram{overflow-x:auto}
+.diagram svg{display:block;width:100%;min-width:560px;height:auto}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.grid2>*{min-width:0}
+.concept{display:flex;flex-direction:column;gap:6px;padding:16px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
+.concept b{font-family:var(--display)}
+.tag{display:inline-block;font-family:var(--mono);font-size:.72rem;padding:2px 8px;border-radius:99px;letter-spacing:.04em}
+.t-acc{background:var(--accent-soft);color:var(--accent)}
+.t-en{background:var(--energy-soft);color:var(--energy)}
+.t-loss{background:var(--loss-soft);color:var(--loss)}
+.t-info{background:var(--info-soft);color:var(--info)}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.93rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.formula{font-family:var(--mono);background:var(--surface);border-left:3px solid var(--accent);padding:14px 16px;white-space:pre-wrap;font-size:.9rem;overflow-x:auto}
+.authors{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.author{padding:18px;border-radius:6px;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.author .role{font-family:var(--mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em}
+/* simulador */
+.sim{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:20px}
+@media (max-width:680px){.sim{grid-template-columns:1fr}}
+.controls{display:flex;flex-direction:column;gap:14px}
+.ctl label{display:flex;justify-content:space-between;gap:8px;font-size:.88rem}
+.ctl output{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--accent)}
+input[type=range]{width:100%;accent-color:var(--accent)}
+input[type=range]:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.kpi{padding:12px;border-radius:6px;background:var(--bg);border:1px solid var(--line)}
+.kpi .v{font-family:var(--mono);font-size:1.25rem;font-variant-numeric:tabular-nums}
+.kpi .k{font-size:.8rem;color:var(--muted)}
+#chart{width:100%;height:auto;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:.85rem}
+.sw{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:6px}
+footer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;display:flex;flex-direction:column;gap:6px}
+</style>
+
+<main>
+
+<header style="display:flex;flex-direction:column;gap:14px">
+  <span class="eyebrow">Fundamentação · modelagem de sistemas de negócio</span>
+  <h1>Valor real: o sistema que precisa se manter vivo</h1>
+  <p class="lead">Um caso simples, uma pessoa que precisa de abrigo, lido por três correntes da ciência de sistemas. O objetivo é separar o valor real, que mantém um sistema vivo, da roupagem, que é a forma cultural e de mercado que esse valor veste.</p>
+</header>
+
+<!-- AUTORES -->
+<section>
+  <span class="eyebrow">As três correntes e seus autores</span>
+  <div class="authors">
+    <div class="author">
+      <span class="role" style="color:var(--info)">A gramática</span>
+      <h3>Ludwig von Bertalanffy</h3>
+      <p class="ref">General System Theory, 1968</p>
+      <p>Todo ser vivo ou organização é um <b>sistema aberto</b>: só se mantém trocando energia e matéria com o ambiente.</p>
+    </div>
+    <div class="author">
+      <span class="role" style="color:var(--energy)">A física</span>
+      <h3>Georgescu-Roegen e H. T. Odum</h3>
+      <p class="ref">The Entropy Law and the Economic Process, 1971 · Environment, Power and Society, 1971</p>
+      <p>Manter-se vivo custa <b>energia ordenada</b> e gera desordem (entropia). O valor real é a vida mantida. A energia gasta é o custo.</p>
+    </div>
+    <div class="author">
+      <span class="role" style="color:var(--accent)">A continuidade</span>
+      <h3>Stafford Beer</h3>
+      <p class="ref">Brain of the Firm, 1972 · Viable System Model</p>
+      <p>Um sistema é <b>viável</b> se continua existindo num ambiente que muda. Para isso precisa operar, controlar-se e olhar para fora e para o futuro.</p>
+    </div>
+  </div>
+  <p class="muted">Bertalanffy complementa os outros dois. Ele define o que é "manter-se" (estado estável) e mostra que caminhos diferentes chegam ao mesmo estado (equifinalidade). A física de Georgescu-Roegen e Odum mede o custo desse estado, e Beer explica como ele dura.</p>
+</section>
+
+<!-- CASO -->
+<section>
+  <span class="eyebrow">O caso</span>
+  <h2>Uma pessoa precisa se proteger da chuva</h2>
+  <p>Ela é um sistema com uma necessidade física: manter a temperatura do corpo e a integridade dos seus bens. Ela tem um único recurso próprio, a <b>energia do seu trabalho</b>. Há dois caminhos para atender a necessidade:</p>
+  <div class="grid2">
+    <div class="concept">
+      <span class="tag t-acc">Caminho A · autoprodução</span>
+      <b>Constrói o próprio barraco</b>
+      <p>O trabalho vira abrigo diretamente, sem intermediário. Parte da energia se dissipa e o barraco se desgasta, mas a função "abrigo" fica sob controle do próprio sistema.</p>
+    </div>
+    <div class="concept">
+      <span class="tag t-en">Caminho B · troca</span>
+      <b>Paga aluguel</b>
+      <p>O trabalho vira dinheiro, que sai do sistema para outro sistema (o proprietário), que devolve a função "abrigo". O laço é aberto, e a parte que não volta é transferida a outro sistema.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 1. BERTALANFFY -->
+<section>
+  <span class="eyebrow">1 · Bertalanffy: sistema aberto</span>
+  <h2>A pessoa como sistema aberto</h2>
+  <p>Um sistema fechado tende ao equilíbrio final, que para um ser vivo é a morte. Um sistema aberto mantém um <b>estado estável</b> (<i>Fließgleichgewicht</i>, equilíbrio de fluxo) porque recebe energia e expulsa desordem o tempo todo. A chuva é uma perturbação que empurra o sistema para fora desse estado. O abrigo é a estrutura que o protege.</p>
+  <div class="box diagram">
+    <svg viewBox="0 0 760 300" role="img" aria-label="Diagrama do sistema aberto: entradas de energia e alimento, saída de resíduos e calor, perturbação da chuva e abrigo como fronteira">
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker>
+        <marker id="ahE" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--energy)"/></marker>
+        <marker id="ahL" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--loss)"/></marker>
+      </defs>
+      <!-- abrigo -->
+      <path d="M250 120 L380 50 L510 120 L510 250 L250 250 Z" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+      <text x="380" y="80" text-anchor="middle" font-family="var(--mono)" font-size="12" fill="var(--accent)">FRONTEIRA: ABRIGO</text>
+      <!-- sistema -->
+      <circle cx="380" cy="175" r="52" fill="var(--surface)" stroke="var(--fg)" stroke-width="2"/>
+      <text x="380" y="170" text-anchor="middle" font-family="var(--display)" font-weight="700" font-size="15" fill="var(--fg)">Pessoa</text>
+      <text x="380" y="190" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--muted)">estado estável</text>
+      <!-- entradas -->
+      <line x1="40" y1="175" x2="322" y2="175" stroke="var(--energy)" stroke-width="2.5" marker-end="url(#ahE)"/>
+      <text x="40" y="160" font-family="var(--body)" font-size="13" fill="var(--energy)">Entrada: alimento, energia</text>
+      <text x="40" y="198" font-family="var(--mono)" font-size="11" fill="var(--muted)">baixa entropia</text>
+      <!-- saidas -->
+      <line x1="438" y1="175" x2="720" y2="175" stroke="var(--muted)" stroke-width="2.5" marker-end="url(#ah)"/>
+      <text x="720" y="160" text-anchor="end" font-family="var(--body)" font-size="13" fill="var(--muted)">Saída: calor, resíduos</text>
+      <text x="720" y="198" text-anchor="end" font-family="var(--mono)" font-size="11" fill="var(--muted)">alta entropia</text>
+      <!-- chuva -->
+      <g stroke="var(--loss)" stroke-width="2">
+        <line x1="300" y1="0" x2="290" y2="30"/><line x1="350" y1="2" x2="340" y2="32"/><line x1="410" y1="0" x2="400" y2="30"/><line x1="460" y1="2" x2="450" y2="32"/>
+      </g>
+      <text x="560" y="30" font-family="var(--body)" font-size="13" fill="var(--loss)">Perturbação: chuva, frio</text>
+      <text x="380" y="285" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--muted)">o abrigo reduz a energia necessária para manter o estado</text>
+    </svg>
+  </div>
+  <div class="grid2">
+    <div class="concept"><span class="tag t-info">Conceito</span><b>Equifinalidade</b><p>Sistemas abertos chegam ao mesmo estado final por caminhos diferentes. Barraco, casa alugada e mansão entregam a mesma função: corpo seco e aquecido. A necessidade é uma só, e as formas de atendê-la são muitas.</p></div>
+    <div class="concept"><span class="tag t-info">Conceito</span><b>Hierarquia de sistemas</b><p>A pessoa está dentro de uma família, que está dentro de uma comunidade, que está dentro de uma economia. Cada nível é um sistema aberto com as suas próprias necessidades.</p></div>
+  </div>
+</section>
+
+<!-- 2. FISICA -->
+<section>
+  <span class="eyebrow">2 · Georgescu-Roegen e Odum: a física do valor</span>
+  <h2>O valor é vida mantida, e a energia é o custo</h2>
+  <p><b>Georgescu-Roegen</b> mostrou que todo processo econômico transforma recursos de baixa entropia em resíduos de alta entropia. Para ele, o produto verdadeiro desse processo não é o objeto material. É o <b>fluxo imaterial de "gozo da vida"</b> (<i>enjoyment of life</i>). O barraco é entropia gasta, e o valor é a pessoa seca, viva e capaz de trabalhar amanhã.</p>
+  <p><b>Odum</b> deu a medida. Toda coisa carrega a <b>emergia</b>: a energia de um único tipo, em geral solar (unidade: sej), usada direta e indiretamente para produzi-la. Pelo <b>princípio da máxima potência</b> (Lotka e Odum), persistem os sistemas que captam e transformam a maior taxa de energia útil, mesmo abrindo mão da eficiência máxima.</p>
+  <div class="formula">Síntese desta página, a partir de Georgescu-Roegen e Odum:
+
+Valor real para o sistema  = necessidade atendida, vida mantida e vivida
+Custo físico               = energia/emergia gasta para atendê-la
+Ganho líquido do sistema   = energia que ele não precisa mais gastar
+                             com essa necessidade e pode aplicar em outra</div>
+  <div class="box">
+    <h3 style="margin-bottom:6px">Simulador: para onde vai a energia do trabalho</h3>
+    <p class="muted" style="margin-bottom:16px">Modelo didático com valores de exemplo ajustáveis. Usa horas de trabalho como aproximação simples da emergia. Supõe abrigo provisório gratuito durante a obra.</p>
+    <div class="sim">
+      <div class="controls">
+        <div class="ctl"><label for="w">Ganho por hora de trabalho <output id="ow"></output></label><input id="w" type="range" min="8" max="60" step="1" value="15"></div>
+        <div class="ctl"><label for="r">Aluguel mensal <output id="or"></output></label><input id="r" type="range" min="300" max="3000" step="50" value="900"></div>
+        <div class="ctl"><label for="b">Horas para construir o barraco <output id="ob"></output></label><input id="b" type="range" min="200" max="3000" step="50" value="900"></div>
+        <div class="ctl"><label for="m">Material comprado (R$) <output id="om"></output></label><input id="m" type="range" min="0" max="40000" step="500" value="8000"></div>
+        <div class="ctl"><label for="k">Manutenção (horas/mês) <output id="ok"></output></label><input id="k" type="range" min="0" max="20" step="1" value="4"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+        <div class="readout">
+          <div class="kpi"><div class="k">Aluguel em horas/mês</div><div class="v" id="kr"></div></div>
+          <div class="kpi"><div class="k">Barraco: custo total em horas</div><div class="v" id="kb"></div></div>
+          <div class="kpi"><div class="k">Ponto de equilíbrio (meses)</div><div class="v" id="ke"></div></div>
+        </div>
+        <svg id="chart" viewBox="0 0 520 240" role="img" aria-label="Gráfico de horas acumuladas gastas com abrigo em cada caminho"></svg>
+        <div class="legend">
+          <span><span class="sw" style="background:var(--energy)"></span>B · aluguel: horas pagas a outro sistema (custo físico + transferência)</span>
+          <span><span class="sw" style="background:var(--accent)"></span>A · barraco: construção + manutenção</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="muted">Leitura física: depois do ponto de equilíbrio, cada mês no barraco libera energia que pode atender outras necessidades (alimento, família, estudo). No aluguel, essa energia sai do sistema todo mês. Ela não se perde no universo: vai sustentar outro sistema, o do proprietário, que forneceu o capital construído.</p>
+</section>
+
+<!-- 3. BEER -->
+<section>
+  <span class="eyebrow">3 · Stafford Beer: viabilidade e continuidade</span>
+  <h2>Manter-se vivo no tempo exige cinco funções</h2>
+  <p>Beer pergunta o que um sistema precisa ter para <b>continuar existindo</b> num ambiente que muda. A resposta são cinco subsistemas. Eles valem para uma pessoa, uma família ou uma empresa, porque o modelo é recursivo.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Subsistema</th><th>Função</th><th>Pessoa / família</th><th>Empresa</th></tr></thead>
+      <tbody>
+        <tr><td><b>S1 · Operação</b></td><td>Fazer o trabalho que gera valor</td><td>Trabalhar, construir o barraco</td><td>Produzir, entregar ao cliente</td></tr>
+        <tr><td><b>S2 · Coordenação</b></td><td>Evitar conflito entre operações</td><td>Dividir horários e tarefas da casa</td><td>Agenda, fluxo entre setores</td></tr>
+        <tr><td><b>S3 · Controle</b></td><td>Alocar recursos, cuidar do aqui e agora</td><td>Orçamento do mês</td><td>Gestão de custos e desempenho</td></tr>
+        <tr><td><b>S4 · Inteligência</b></td><td>Olhar o ambiente externo e o futuro</td><td>Época de chuva, mercado de trabalho, filho chegando</td><td>Mudança de demanda, tecnologia, concorrência</td></tr>
+        <tr><td><b>S5 · Identidade</b></td><td>Definir quem o sistema é e para que existe</td><td>"Somos uma família, queremos segurança"</td><td>Missão, propósito, limites éticos</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="grid2">
+    <div class="concept"><span class="tag t-loss">Falha clássica</span><b>S1 forte, S4 fraco</b><p>A máquina mais eficiente do mundo produzindo algo que a demanda deixou de querer. A eficiência interna não garante a viabilidade. É aqui que os modelos centrados só em eficiência falham.</p></div>
+    <div class="concept"><span class="tag t-acc">Continuidade</span><b>Sistemas acoplados</b><p>No casal, cada parte reduz o custo de manutenção da outra, e os dois compartilham um sistema comum: o filho. Ambos investem na viabilidade do conjunto porque a sua própria viabilidade depende dele.</p></div>
+  </div>
+  <p class="muted">Lei de Ashby, usada por Beer: só a variedade absorve variedade. O sistema precisa de tantas formas de resposta quanto o ambiente tem de formas de ameaça. Quem tem um só caminho para o abrigo fica vulnerável quando esse caminho fecha.</p>
+</section>
+
+<!-- NECESSIDADE x ROUPAGEM -->
+<section>
+  <span class="eyebrow">Síntese · necessidade e roupagem</span>
+  <h2>A necessidade é física, e a roupagem é a forma que ela veste</h2>
+  <p>O economista chileno <b>Manfred Max-Neef</b> (<i>Desenvolvimento à Escala Humana</i>, 1991) faz a mesma separação: as <b>necessidades</b> humanas são poucas, universais e estáveis; os <b>satisfatores</b>, as formas de atendê-las, mudam com a cultura e a época. Ele inclui a <b>identidade</b> entre as necessidades. Por isso a roupagem não é falsa: ela atende a necessidade de identidade, mas não acrescenta nada à de proteção. Para Max-Neef, a casa é um satisfator; as necessidades são subsistência e proteção.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Satisfator</th><th>Abrigo físico atendido</th><th>Custo energético</th><th>O que é o restante</th></tr></thead>
+      <tbody>
+        <tr><td>Barraco próprio</td><td><span class="tag t-acc">Sim</span></td><td>Baixo</td><td>Quase tudo é valor real</td></tr>
+        <tr><td>Casa alugada</td><td><span class="tag t-acc">Sim</span></td><td>Médio, recorrente</td><td>Transferência a outro sistema em troca do capital dele</td></tr>
+        <tr><td>Casa média própria</td><td><span class="tag t-acc">Sim</span></td><td>Médio</td><td>Valor real + conforto + segurança no tempo</td></tr>
+        <tr><td>Mansão em bairro de prestígio</td><td><span class="tag t-acc">Sim</span></td><td>Muito alto</td><td>A maior parte é <b>roupagem</b>: identidade e status</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="formula">Síntese desta página:
+
+Preço pago = custo físico da função real
+           + transferência a outros sistemas (capital, renda, poder)
+           + roupagem (identidade, status, moda)
+
+Valor real  = só a primeira parcela, vista pelo sistema que tem a necessidade</div>
+</section>
+
+<!-- MODELO INTEGRADO -->
+<section>
+  <span class="eyebrow">Modelo integrado</span>
+  <h2>Como as três correntes se encaixam</h2>
+  <div class="box diagram">
+    <svg viewBox="0 0 760 250" role="img" aria-label="Fluxo integrado: necessidade, energia, função, viabilidade e realimentação">
+      <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker></defs>
+      <g font-family="var(--body)" font-size="13">
+        <rect x="10" y="60" width="150" height="80" rx="6" fill="var(--info-soft)" stroke="var(--info)"/>
+        <text x="85" y="92" text-anchor="middle" font-weight="600" fill="var(--fg)">Necessidade</text>
+        <text x="85" y="112" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--info)">Bertalanffy</text>
+        <rect x="200" y="60" width="150" height="80" rx="6" fill="var(--energy-soft)" stroke="var(--energy)"/>
+        <text x="275" y="92" text-anchor="middle" font-weight="600" fill="var(--fg)">Energia aplicada</text>
+        <text x="275" y="112" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--energy)">Odum</text>
+        <rect x="390" y="60" width="150" height="80" rx="6" fill="var(--energy-soft)" stroke="var(--energy)"/>
+        <text x="465" y="92" text-anchor="middle" font-weight="600" fill="var(--fg)">Vida mantida</text>
+        <text x="465" y="112" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--energy)">Georgescu-Roegen</text>
+        <rect x="580" y="60" width="170" height="80" rx="6" fill="var(--accent-soft)" stroke="var(--accent)"/>
+        <text x="665" y="92" text-anchor="middle" font-weight="600" fill="var(--fg)">Viabilidade no tempo</text>
+        <text x="665" y="112" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--accent)">Beer</text>
+      </g>
+      <g stroke="var(--muted)" stroke-width="2" fill="none">
+        <line x1="160" y1="100" x2="198" y2="100" marker-end="url(#ah2)"/>
+        <line x1="350" y1="100" x2="388" y2="100" marker-end="url(#ah2)"/>
+        <line x1="540" y1="100" x2="578" y2="100" marker-end="url(#ah2)"/>
+        <path d="M665 140 L665 200 L85 200 L85 142" marker-end="url(#ah2)"/>
+      </g>
+      <text x="375" y="225" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--muted)">energia liberada realimenta o sistema: novas necessidades, família, crescimento</text>
+    </svg>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Pergunta de engenharia</th><th>Autor</th><th>Resposta no caso do abrigo</th></tr></thead>
+      <tbody>
+        <tr><td>O que é o sistema e do que ele precisa?</td><td>Bertalanffy</td><td>Uma pessoa aberta ao ambiente, que precisa manter o estado estável contra a chuva</td></tr>
+        <tr><td>Quanto custa, fisicamente, atender a necessidade?</td><td>Odum</td><td>Horas de trabalho e materiais (emergia) do barraco ou do aluguel</td></tr>
+        <tr><td>O que é o valor de fato?</td><td>Georgescu-Roegen</td><td>A vida mantida e vivida com algum bem-estar (o "gozo da vida"): seca, aquecida, capaz de trabalhar amanhã</td></tr>
+        <tr><td>Como isso continua no tempo?</td><td>Beer</td><td>Operar, controlar o orçamento, olhar o futuro e saber para que a família existe</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PONTE -->
+<section>
+  <span class="eyebrow">Ponte para os próximos trabalhos</span>
+  <h2>A empresa é o mesmo sistema, em outra escala</h2>
+  <div class="grid2">
+    <div class="concept"><b>Pessoa sem abrigo</b><p>Perde energia para a chuva todos os dias.</p></div>
+    <div class="concept"><b>Empresa com ineficiência</b><p>Perde energia (dinheiro, horas, material) para um processo ruim todos os dias.</p></div>
+    <div class="concept"><b>Construir o barraco</b><p>Aplicar energia uma vez para parar a perda recorrente.</p></div>
+    <div class="concept"><b>Consultor que mostra e corrige a perda</b><p>Traz informação (S4) e reduz a energia que o sistema desperdiça. Esse é o valor real que ele cria.</p></div>
+  </div>
+  <p>O teste é sempre o mesmo: <b>depois da intervenção, o sistema precisa gastar menos energia para continuar vivo, ou ganha capacidade para crescer?</b> Se a resposta for sim, houve valor real. Se só mudou a forma ou o dono da energia, foi roupagem ou transferência.</p>
+</section>
+
+<!-- GLOSSARIO -->
+<section>
+  <span class="eyebrow">Glossário</span>
+  <div class="tablewrap">
+    <table>
+      <tbody>
+        <tr><td><b>Sistema aberto</b></td><td>Sistema que troca energia e matéria com o ambiente para se manter.</td></tr>
+        <tr><td><b>Estado estável</b></td><td>Equilíbrio dinâmico mantido por fluxo contínuo, não por repouso.</td></tr>
+        <tr><td><b>Equifinalidade</b></td><td>Caminhos diferentes levam ao mesmo estado final.</td></tr>
+        <tr><td><b>Entropia</b></td><td>Medida de desordem. Todo processo real a aumenta.</td></tr>
+        <tr><td><b>Emergia</b></td><td>Energia de um único tipo (em geral solar, em sej) usada direta e indiretamente para produzir algo.</td></tr>
+        <tr><td><b>Máxima potência</b></td><td>Persistem os sistemas que maximizam a potência útil (energia por tempo), não a eficiência.</td></tr>
+        <tr><td><b>Viabilidade</b></td><td>Capacidade de continuar existindo num ambiente que muda.</td></tr>
+        <tr><td><b>Satisfator</b></td><td>Forma concreta, cultural, de atender uma necessidade universal.</td></tr>
+        <tr><td><b>Roupagem</b></td><td>Parcela do preço que atende identidade ou status, não a necessidade física.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <span>Referências: L. von Bertalanffy, <i>General System Theory</i> (1968) · N. Georgescu-Roegen, <i>The Entropy Law and the Economic Process</i> (1971) · H. T. Odum, <i>Environment, Power and Society</i> (1971) · S. Beer, <i>Brain of the Firm</i> (1972) · W. R. Ashby, <i>An Introduction to Cybernetics</i> (1956) · M. Max-Neef, <i>Human Scale Development</i> (1991).</span>
+  <span>Os números do simulador são exemplos ajustáveis, não dados reais.</span>
+</footer>
+</main>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const fmt=n=>Math.round(n).toLocaleString('pt-BR');
+  const money=n=>'R$ '+fmt(n);
+  function draw(){
+    const w=+$('w').value, r=+$('r').value, b=+$('b').value, m=+$('m').value, k=+$('k').value;
+    $('ow').textContent=money(w)+'/h'; $('or').textContent=money(r);
+    $('ob').textContent=fmt(b)+' h'; $('om').textContent=money(m); $('ok').textContent=k+' h';
+    const rentH=r/w;                 // horas/mês transferidas
+    const buildH=b+m/w;              // horas totais para construir (trabalho + material convertido)
+    $('kr').textContent=rentH.toFixed(1)+' h';
+    $('kb').textContent=fmt(buildH)+' h';
+    let be=null;
+    if(rentH>k){ be=buildH/(rentH-k); }
+    $('ke').textContent= be===null ? 'não ocorre' : (be<1?'< 1':Math.ceil(be));
+    const months=120;
+    const A=[],B=[];
+    for(let t=0;t<=months;t++){ B.push(rentH*t); A.push(buildH+k*t); }
+    const maxY=Math.max(B[months],A[months])*1.05;
+    const X0=48,X1=505,Y0=205,Y1=12;
+    const sx=t=>X0+(X1-X0)*t/months, sy=v=>Y0-(Y0-Y1)*v/maxY;
+    const path=arr=>arr.map((v,i)=>(i?'L':'M')+sx(i).toFixed(1)+' '+sy(v).toFixed(1)).join(' ');
+    let g='';
+    for(let i=0;i<=4;i++){ const v=maxY*i/4, y=sy(v);
+      g+=`<line x1="${X0}" x2="${X1}" y1="${y}" y2="${y}" stroke="var(--line)" stroke-width="1"/>`;
+      g+=`<text x="${X0-6}" y="${y+4}" text-anchor="end" font-family="var(--mono)" font-size="10" fill="var(--muted)">${fmt(v)}</text>`; }
+    for(let t=0;t<=months;t+=24){
+      g+=`<text x="${sx(t)}" y="${Y0+16}" text-anchor="middle" font-family="var(--mono)" font-size="10" fill="var(--muted)">${t/12}</text>`; }
+    g+=`<text x="${X0}" y="${Y1-2}" font-family="var(--mono)" font-size="10" fill="var(--muted)">horas acumuladas · eixo: anos</text>`;
+    g+=`<path d="${path(B)}" fill="none" stroke="var(--energy)" stroke-width="2.5"/>`;
+    g+=`<path d="${path(A)}" fill="none" stroke="var(--accent)" stroke-width="2.5"/>`;
+    if(be!==null && be<=months){
+      const x=sx(be), y=sy(buildH+k*be);
+      g+=`<line x1="${x}" x2="${x}" y1="${Y0}" y2="${y}" stroke="var(--muted)" stroke-dasharray="3 3"/>`;
+      g+=`<circle cx="${x}" cy="${y}" r="4.5" fill="var(--fg)"/>`;
+      g+=`<text x="${Math.min(x+8,X1-80)}" y="${y-8}" font-family="var(--mono)" font-size="10" fill="var(--fg)">equilíbrio</text>`;
+    }
+    $('chart').innerHTML=g;
+  }
+  ['w','r','b','m','k'].forEach(id=>$(id).addEventListener('input',draw));
+  draw();
+})();
+</script>
