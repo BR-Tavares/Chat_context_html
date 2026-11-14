@@ -45,6 +45,7 @@ th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);verti
 th{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
 .tag{display:inline-block;font-family:var(--mono);font-size:.72rem;padding:2px 8px;border-radius:99px}
 .t-loss{background:var(--loss-soft);color:var(--loss)}
+td.c{text-align:center;color:var(--accent);font-size:1.05rem}
 .t-acc{background:var(--accent-soft);color:var(--accent)}
 footer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
 svg text{font-family:var(--body)}
@@ -471,5 +472,70 @@ svg text{font-family:var(--body)}
   </div>
 </section>
 
-<footer>Referências: S. Beer, <i>Brain of the Firm</i> (1972) · J. G. Miller, <i>Living Systems</i> (1978) · C. Hitch, "Sub-optimization in operations problems", <i>JORSA</i> (1953) · C. W. Churchman, <i>The Systems Approach</i> (1968) · C. Argyris, <i>Overcoming Organizational Defenses</i> (1990) · R. Katz e T. Allen, "Investigating the Not Invented Here (NIH) Syndrome", <i>R&amp;D Management</i> (1982) · W. M. Cohen e D. A. Levinthal, <i>Administrative Science Quarterly</i> 35(1) (1990) · J. W. Forrester, <i>Industrial Dynamics</i> (1961) · P. Senge, <i>The Fifth Discipline</i> (1990) · J. D. Sterman, <i>Business Dynamics</i> (2000) · L. C. Cascudo, <i>História da Alimentação no Brasil</i> (1967) · J. K. Galbraith, <i>The Affluent Society</i> (1958) · P. David, "Clio and the Economics of QWERTY", <i>AER</i> (1985) · NEPA/Unicamp, Tabela TACO, 4ª ed. (2011) · Abitrigo, dados de importação 2025 · Procon-SP, pesquisa de padarias 2026 · Cepea/Ceagesp, cotações de banana 2026 · Anvisa, RDC 138/2017, RDC 623/2022 e IN 160/2022 · Embrapa, <i>Subsídio ao trigo</i> · W. B. Arthur, "Competing technologies, increasing returns, and lock-in", <i>Economic Journal</i> (1989) · W. R. Ashby, <i>An Introduction to Cybernetics</i> (1956) · L. von Bertalanffy, <i>General System Theory</i> (1968) · R. Cyert e J. March, <i>A Behavioral Theory of the Firm</i> (1963) · C. Christensen, <i>The Innovator's Dilemma</i> (1997) · H. T. Odum, <i>Environmental Accounting</i> (1996). Notação de processo inspirada em BPMN 2.0 (OMG).</footer>
+<section style="display:flex;flex-direction:column;gap:14px">
+  <div class="col">
+    <span class="eyebrow">Quadro 5 · Modelos de adoção sistêmica</span>
+    <h2>Como uma tecnologia entra em muitos clientes ao mesmo tempo</h2>
+    <p>Vender cliente por cliente exige abrir os quatro portões do Quadro 1 a cada vez. Os modelos abaixo abrem portões para muitos clientes de uma só vez. Cada um tem um <b>organizador</b> que assume funções que o cliente sozinho não tem (Beer: S4, olhar o futuro, e S5, identidade).</p>
+  </div>
+
+  <h3>5a · Dois casos históricos</h3>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th></th><th>Mondragon (País Basco, Espanha)</th><th>Integração avícola (Brasil)</th></tr></thead>
+    <tbody>
+      <tr><td><b>Quem começou</b></td><td>O padre José María Arizmendiarrieta, a partir de 1941</td><td>A agroindústria: Sadia (Attilio Fontana, Concórdia, 1944); a partir de 1956, apoio da extensão rural da ACARESC</td></tr>
+      <tr><td><b>Sequência</b></td><td>Escola politécnica (1943) → primeira cooperativa, ULGOR (1956) → banco cooperativo, Caja Laboral (1959)</td><td>Frigorífico → contratos com suinocultores (anos 1950) → parceria avícola (a partir de 1961)</td></tr>
+      <tr><td><b>O que o organizador fornece</b></td><td>Formação, crédito, planejamento</td><td>Pintinho, ração, remédio, assistência técnica, compra garantida</td></tr>
+      <tr><td><b>Fundo</b> (Georgescu-Roegen: o que presta o serviço sem se consumir)</td><td>Trabalhador-sócio e conhecimento</td><td>Aviário e família do produtor</td></tr>
+      <tr><td><b>Quem fica com o valor</b></td><td>Repartido entre os sócios</td><td>Concentrado na integradora</td></tr>
+      <tr><td><b>O que garante a continuidade</b></td><td>Propriedade comum</td><td>Contrato e dependência</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>5b · Sete modelos e os portões que cada um abre</h3>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Modelo</th><th>Como funciona</th><th>Exemplo no Brasil</th><th style="text-align:center">1</th><th style="text-align:center">2</th><th style="text-align:center">3</th><th style="text-align:center">4</th></tr></thead>
+    <tbody>
+      <tr><td><b>Integração</b></td><td>O organizador controla os fluxos físicos e compra o produto</td><td>Avicultura, suinocultura</td><td class="c">●</td><td class="c">●</td><td class="c">●</td><td class="c">●</td></tr>
+      <tr><td><b>Difusão por demonstração</b><br><span class="muted">Rogers, 1962</span></td><td>Os primeiros adotantes mostram o resultado e os vizinhos copiam</td><td>Emater, Embrapa: unidades demonstrativas</td><td class="c">●</td><td class="c">●</td><td class="c">○</td><td class="c">●</td></tr>
+      <tr><td><b>Padrão público</b></td><td>O Estado define o padrão e todos aderem</td><td>Pix, nota fiscal eletrônica, eSocial</td><td class="c">○</td><td class="c">○</td><td class="c">●</td><td class="c">●</td></tr>
+      <tr><td><b>Plataforma</b><br><span class="muted">Parker, Van Alstyne e Choudary, 2016</span></td><td>Um intermediário liga quem precisa a quem resolve</td><td>Marketplaces</td><td class="c">●</td><td class="c">○</td><td class="c">●</td><td class="c">○</td></tr>
+      <tr><td><b>Compra pública de inovação</b><br><span class="muted">Edquist; Mazzucato, 2013</span></td><td>O governo compra a solução antes de ela existir no mercado</td><td>Marco Legal das Startups (LC 182/2021): Contrato Público de Solução Inovadora</td><td class="c">●</td><td class="c">○</td><td class="c">●</td><td class="c">○</td></tr>
+      <tr><td><b>Inovação aberta com âncora</b><br><span class="muted">Chesbrough, 2003</span></td><td>A grande empresa lança um desafio e as startups resolvem</td><td>Desafios corporativos; Embrapii (custo repartido)</td><td class="c">●</td><td class="c">●</td><td class="c">●</td><td class="c">○</td></tr>
+      <tr><td><b>Venda de resultado</b><br><span class="muted">Vandermerwe e Rada, 1988</span></td><td>O cliente paga pelo resultado e o fornecedor assume a complexidade</td><td>Software como serviço; pagamento por perda evitada</td><td class="c">○</td><td class="c">○</td><td class="c">●</td><td class="c">●</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="muted">● abre o portão para muitos clientes · ○ não abre ou abre pouco. No padrão público, a obrigação legal dispensa os portões 1 e 2. Portões do Quadro 1: 1 percebe a perda, 2 aceita olhar de fora, 3 tem orçamento, 4 consegue absorver. A classificação é uma síntese desta página.</p>
+
+  <h3>5c · Por que a integração não serve diretamente aos doutores</h3>
+  <div class="grid2">
+    <div class="concept"><b>Conhecimento não se gasta nem se entrega em lote como a ração</b><p>Não existe "ração de conhecimento" para distribuir. O serviço precisa ser prestado caso a caso.</p></div>
+    <div class="concept"><b>Cada cliente é diferente</b><p>O frango é padronizado. A perda de cada empresa ou prefeitura é única.</p></div>
+    <div class="concept"><b>Quem integra captura o valor</b><p>Na avicultura, o produtor fica dependente da integradora.</p></div>
+    <div class="concept"><b>Não há integradora</b><p>Ninguém controla os fluxos do mercado de inovação.</p></div>
+  </div>
+
+  <h3>5d · A perturbação atual: inteligência artificial</h3>
+  <div class="tablewrap">
+  <table>
+    <tbody>
+      <tr><td><b>Dado</b></td><td>Bancos devem investir ≈ R$ 3 bi em IA e dados em 2026, num orçamento de tecnologia de ≈ R$ 50 bi (Pesquisa Febraban/Deloitte 2026). O país perdeu ≈ 37% das agências em dez anos (Banco Central). O assistente virtual do Bradesco resolveu 87% das interações sem humano no 1º semestre de 2026.</td></tr>
+      <tr><td><b>Leitura (Beer)</b></td><td>A IA automatiza a operação (S1) e parte da coordenação (S2). Olhar o futuro (S4) e definir a identidade (S5) continuam humanos.</td></tr>
+      <tr><td><b>Leitura (Georgescu-Roegen)</b></td><td>O serviço antes prestado por um fundo humano, o atendente, passa a ser prestado por um fundo técnico.</td></tr>
+      <tr><td><b>Janela (Quadro 4)</b></td><td>Para muitas empresas a IA é uma perturbação. Abre espaço para quem sabe redesenhar sistemas viáveis.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="muted">Não há número oficial de demissões causadas especificamente pela IA; isso exigiria dados do Caged ou dos balanços de cada banco.</p>
+
+  <div class="col">
+    <p><b>Síntese para os doutores:</b> o arranjo mais próximo é uma cooperativa ao estilo Mondragon, com escola (formação em fundamentos), fomento no papel do banco (FAPERJ, Embrapii) e um organizador de demandas no papel do S4. Os canais de entrada são a compra pública de inovação, os desafios de empresas âncora e a venda de resultado. Nos três, quem precisa ter capacidade de absorver é o fornecedor, e não o cliente.</p>
+  </div>
+</section>
+
+<footer>Referências: S. Beer, <i>Brain of the Firm</i> (1972) · J. G. Miller, <i>Living Systems</i> (1978) · C. Hitch, "Sub-optimization in operations problems", <i>JORSA</i> (1953) · C. W. Churchman, <i>The Systems Approach</i> (1968) · C. Argyris, <i>Overcoming Organizational Defenses</i> (1990) · R. Katz e T. Allen, "Investigating the Not Invented Here (NIH) Syndrome", <i>R&amp;D Management</i> (1982) · W. M. Cohen e D. A. Levinthal, <i>Administrative Science Quarterly</i> 35(1) (1990) · J. W. Forrester, <i>Industrial Dynamics</i> (1961) · P. Senge, <i>The Fifth Discipline</i> (1990) · J. D. Sterman, <i>Business Dynamics</i> (2000) · L. C. Cascudo, <i>História da Alimentação no Brasil</i> (1967) · J. K. Galbraith, <i>The Affluent Society</i> (1958) · P. David, "Clio and the Economics of QWERTY", <i>AER</i> (1985) · NEPA/Unicamp, Tabela TACO, 4ª ed. (2011) · Abitrigo, dados de importação 2025 · Procon-SP, pesquisa de padarias 2026 · Cepea/Ceagesp, cotações de banana 2026 · Anvisa, RDC 138/2017, RDC 623/2022 e IN 160/2022 · Embrapa, <i>Subsídio ao trigo</i> · W. B. Arthur, "Competing technologies, increasing returns, and lock-in", <i>Economic Journal</i> (1989) · W. R. Ashby, <i>An Introduction to Cybernetics</i> (1956) · L. von Bertalanffy, <i>General System Theory</i> (1968) · R. Cyert e J. March, <i>A Behavioral Theory of the Firm</i> (1963) · C. Christensen, <i>The Innovator's Dilemma</i> (1997) · H. T. Odum, <i>Environmental Accounting</i> (1996) · E. Rogers, <i>Diffusion of Innovations</i> (1962) · G. Parker, M. Van Alstyne e S. Choudary, <i>Platform Revolution</i> (2016) · M. Mazzucato, <i>The Entrepreneurial State</i> (2013) · H. Chesbrough, <i>Open Innovation</i> (2003) · S. Vandermerwe e J. Rada, "Servitization of business", <i>European Management Journal</i> (1988) · Lei Complementar 182/2021 · Pesquisa Febraban de Tecnologia Bancária 2026 · M. S. M. Saes et al., USP, sobre a Sadia · W. F. Whyte e K. K. Whyte, <i>Making Mondragon</i> (1988). Notação de processo inspirada em BPMN 2.0 (OMG).</footer>
 </main>
