@@ -394,5 +394,82 @@ svg text{font-family:var(--body)}
   </div>
 </section>
 
-<footer>Referências: S. Beer, <i>Brain of the Firm</i> (1972) · J. G. Miller, <i>Living Systems</i> (1978) · C. Hitch, "Sub-optimization in operations problems", <i>JORSA</i> (1953) · C. W. Churchman, <i>The Systems Approach</i> (1968) · C. Argyris, <i>Overcoming Organizational Defenses</i> (1990) · R. Katz e T. Allen, "Investigating the Not Invented Here (NIH) Syndrome", <i>R&amp;D Management</i> (1982) · W. M. Cohen e D. A. Levinthal, <i>Administrative Science Quarterly</i> 35(1) (1990) · J. W. Forrester, <i>Industrial Dynamics</i> (1961) · P. Senge, <i>The Fifth Discipline</i> (1990) · J. D. Sterman, <i>Business Dynamics</i> (2000) · L. C. Cascudo, <i>História da Alimentação no Brasil</i> (1967) · J. K. Galbraith, <i>The Affluent Society</i> (1958) · P. David, "Clio and the Economics of QWERTY", <i>AER</i> (1985) · NEPA/Unicamp, Tabela TACO, 4ª ed. (2011) · Abitrigo, dados de importação 2025 · Procon-SP, pesquisa de padarias 2026 · Cepea/Ceagesp, cotações de banana 2026 · Anvisa, RDC 138/2017, RDC 623/2022 e IN 160/2022 · Embrapa, <i>Subsídio ao trigo</i> · W. B. Arthur, "Competing technologies, increasing returns, and lock-in", <i>Economic Journal</i> (1989). Notação de processo inspirada em BPMN 2.0 (OMG).</footer>
+<section style="display:flex;flex-direction:column;gap:14px">
+  <div class="col">
+    <span class="eyebrow">Quadro 4 · Janela de entrada</span>
+    <h2>Onde o mercado está aberto com baixo investimento</h2>
+    <p>Um sistema em <b>estado estável</b> (Bertalanffy, 1968) não quer mudar. Ele se abre quando uma <b>perturbação</b> o tira do equilíbrio e ele passa a ter situações para as quais não tem resposta, uma <b>falta de variedade</b> (Ashby, 1956; aplicada por Beer, 1972). Essa falta aparece como perda. Nesse momento os portões 1, 2 e 3 do Quadro 1 se abrem sozinhos, e a inovação entra sem precisar convencer ninguém.</p>
+  </div>
+  <div class="board">
+  <svg id="q4" viewBox="0 0 980 430" role="img" aria-label="Janela de entrada: perturbação, perda, portões abertos; concorrente sem folga; projetista com folga entrega o sistema e volta a observar" style="min-width:820px">
+    <defs><marker id="q4a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker></defs>
+    <g font-size="12" fill="var(--fg)" text-anchor="middle">
+      <g stroke-width="1.6">
+        <rect x="20" y="30" width="160" height="62" rx="6" fill="var(--info-soft)" stroke="var(--info)"/>
+        <rect x="215" y="30" width="160" height="62" rx="6" fill="var(--loss-soft)" stroke="var(--loss)"/>
+        <rect x="410" y="30" width="180" height="62" rx="6" fill="var(--surface)" stroke="var(--fg)"/>
+        <rect x="625" y="30" width="160" height="62" rx="6" fill="var(--accent-soft)" stroke="var(--accent)"/>
+      </g>
+      <text x="100" y="56" font-weight="600">Perturbação</text><text x="100" y="74" fill="var(--muted)" font-size="11">o ambiente muda</text>
+      <text x="295" y="56" font-weight="600">Perda visível</text><text x="295" y="74" fill="var(--muted)" font-size="11">falta de variedade</text>
+      <text x="500" y="56" font-weight="600">Portões 1–3 abertos</text><text x="500" y="74" fill="var(--muted)" font-size="11">checar só o portão 4</text>
+      <text x="705" y="56" font-weight="600">Janela de entrada</text><text x="705" y="74" fill="var(--muted)" font-size="11">baixo investimento</text>
+    </g>
+    <g stroke="var(--muted)" stroke-width="1.6" marker-end="url(#q4a)"><line x1="180" y1="61" x2="213" y2="61"/><line x1="375" y1="61" x2="408" y2="61"/><line x1="590" y1="61" x2="623" y2="61"/></g>
+    <g font-size="11.5" fill="var(--muted)">
+      <text x="20" y="118">Exemplo: urbanização</text>
+      <text x="215" y="118">sem tempo para o café regional</text>
+      <text x="410" y="118">cidade aceita padaria pronta</text>
+      <text x="625" y="118">trigo importado ocupa a janela</text>
+    </g>
+
+    <line x1="20" y1="145" x2="960" y2="145" stroke="var(--line)"/>
+    <text x="20" y="172" font-family="var(--mono)" font-size="11" fill="var(--muted)" letter-spacing=".06em">QUEM ALCANÇA A JANELA PRIMEIRO</text>
+
+    <rect x="20" y="190" width="440" height="120" rx="6" fill="var(--loss-soft)" stroke="var(--loss)" stroke-width="1.6"/>
+    <g font-size="12" fill="var(--fg)">
+      <text x="36" y="214" font-weight="600">Concorrente instalado</text>
+      <text x="36" y="236">S1 lotado: operação cheia de clientes e contratos</text>
+      <text x="36" y="256">S3 domina: gestão do dia a dia ocupa os qualificados</text>
+      <text x="36" y="276">S4 fraco: ninguém olha o futuro a tempo</text>
+      <text x="36" y="298" fill="var(--loss)" font-weight="600">sem folga organizacional → chega tarde</text>
+    </g>
+    <rect x="520" y="190" width="440" height="120" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.6"/>
+    <g font-size="12" fill="var(--fg)">
+      <text x="536" y="214" font-weight="600">Doutor fora do sistema (com tempo livre)</text>
+      <text x="536" y="236">tempo disponível e agilidade de observação</text>
+      <text x="536" y="256">atua como S4 (olhar o futuro): detecta a perturbação</text>
+      <text x="536" y="276">assume compromisso com o ajuste</text>
+      <text x="536" y="298" fill="var(--accent)" font-weight="600">tem folga → chega primeiro</text>
+    </g>
+
+    <line x1="20" y1="335" x2="960" y2="335" stroke="var(--line)"/>
+    <text x="20" y="360" font-family="var(--mono)" font-size="11" fill="var(--muted)" letter-spacing=".06em">CICLO DO PROJETISTA DE SISTEMAS VIÁVEIS</text>
+    <g font-size="12" fill="var(--fg)" text-anchor="middle">
+      <g fill="var(--surface)" stroke="var(--info)" stroke-width="1.6">
+        <rect x="20" y="375" width="190" height="40" rx="20"/><rect x="260" y="375" width="190" height="40" rx="20"/><rect x="500" y="375" width="190" height="40" rx="20"/><rect x="740" y="375" width="220" height="40" rx="20"/>
+      </g>
+      <text x="115" y="400">Observa perturbações</text><text x="355" y="400">Desenha o sistema</text><text x="595" y="400">Entrega a quem implementa</text><text x="850" y="400">Volta a observar (folga livre)</text>
+    </g>
+    <g stroke="var(--muted)" stroke-width="1.6" marker-end="url(#q4a)"><line x1="210" y1="395" x2="258" y2="395"/><line x1="450" y1="395" x2="498" y2="395"/><line x1="690" y1="395" x2="738" y2="395"/></g>
+  </svg>
+  </div>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Ideia</th><th>Conceito consolidado</th></tr></thead>
+    <tbody>
+      <tr><td>O sistema só se abre quando é perturbado</td><td>Estado estável e perturbação (Bertalanffy, 1968)</td></tr>
+      <tr><td>A perda é falta de respostas para a nova situação</td><td>Lei da variedade requerida (Ashby, 1956; Beer, 1972)</td></tr>
+      <tr><td>O concorrente instalado não tem tempo nem atenção sobrando</td><td>Folga organizacional (<i>organizational slack</i>; Cyert e March, 1963)</td></tr>
+      <tr><td>O concorrente atende bem os clientes atuais e por isso perde o novo</td><td>Dilema do inovador (Christensen, 1997)</td></tr>
+      <tr><td>Quem desenha não implementa, e volta a desenhar</td><td>Recursão do sistema viável: o projetista atua no S4/S5 e a operação fica no S1 (Beer, 1972)</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="col">
+    <p><b>Regra do Quadro 4:</b> mercado aberto com baixo investimento = sistema perturbado + perda visível + portões 1, 2 e 3 abertos + concorrente sem folga. A vantagem do doutor não é ter mais recurso, é ter <b>folga</b> e <b>agilidade de observação</b>. Para manter essa vantagem, ele desenha o sistema, entrega a operação e volta a observar.</p>
+  </div>
+</section>
+
+<footer>Referências: S. Beer, <i>Brain of the Firm</i> (1972) · J. G. Miller, <i>Living Systems</i> (1978) · C. Hitch, "Sub-optimization in operations problems", <i>JORSA</i> (1953) · C. W. Churchman, <i>The Systems Approach</i> (1968) · C. Argyris, <i>Overcoming Organizational Defenses</i> (1990) · R. Katz e T. Allen, "Investigating the Not Invented Here (NIH) Syndrome", <i>R&amp;D Management</i> (1982) · W. M. Cohen e D. A. Levinthal, <i>Administrative Science Quarterly</i> 35(1) (1990) · J. W. Forrester, <i>Industrial Dynamics</i> (1961) · P. Senge, <i>The Fifth Discipline</i> (1990) · J. D. Sterman, <i>Business Dynamics</i> (2000) · L. C. Cascudo, <i>História da Alimentação no Brasil</i> (1967) · J. K. Galbraith, <i>The Affluent Society</i> (1958) · P. David, "Clio and the Economics of QWERTY", <i>AER</i> (1985) · NEPA/Unicamp, Tabela TACO, 4ª ed. (2011) · Abitrigo, dados de importação 2025 · Procon-SP, pesquisa de padarias 2026 · Cepea/Ceagesp, cotações de banana 2026 · Anvisa, RDC 138/2017, RDC 623/2022 e IN 160/2022 · Embrapa, <i>Subsídio ao trigo</i> · W. B. Arthur, "Competing technologies, increasing returns, and lock-in", <i>Economic Journal</i> (1989) · W. R. Ashby, <i>An Introduction to Cybernetics</i> (1956) · L. von Bertalanffy, <i>General System Theory</i> (1968) · R. Cyert e J. March, <i>A Behavioral Theory of the Firm</i> (1963) · C. Christensen, <i>The Innovator's Dilemma</i> (1997) · H. T. Odum, <i>Environmental Accounting</i> (1996). Notação de processo inspirada em BPMN 2.0 (OMG).</footer>
 </main>
